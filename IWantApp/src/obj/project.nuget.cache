@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "AH4BsH0s9J5X7g/xaCbzcpF7z1wK0Os8sBiQHgX4VkR9+Vpfzne5YWH+v62WKt1oCgUZA714VvlUP3trlUbOsA==",
+  "dgSpecHash": "jtWavcmxHBZjyyIi7iSM0P+8jSLhrQMecqJKbaISAlpEE49OyMKUDFw/SZSy68J2WppNVkMUvTkwIUc2CorAgQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Legale\\teste\\IWantApp\\src\\IWantApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Legale\\.nuget\\packages\\flunt\\2.0.5\\flunt.2.0.5.nupkg.sha512",
     "C:\\Users\\Legale\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Legale\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
