@@ -1,4 +1,6 @@
+using IWantApp.Endpoints.Categories;
 using IWantApp.Infra.Data;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
+app.MapMethods(CategoryPost.Template, CategoryPost.Methods, CategoryPost.Handle);
 
 app.Run();
