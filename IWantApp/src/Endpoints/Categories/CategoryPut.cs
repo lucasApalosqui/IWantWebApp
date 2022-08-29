@@ -13,6 +13,10 @@ public class CategoryPut
     public static IResult Action([FromRoute]Guid Id,CategoryRequest categoryRequest, ApplicationDbContext context)
     {
         var category = context.Categories.Where(c => c.Id == Id).FirstOrDefault();
+        if(category == null)
+        {
+            return Results.NotFound("This Id not exists");
+        }
         category.Name = categoryRequest.Name;
         category.Active = categoryRequest.Active;
 
