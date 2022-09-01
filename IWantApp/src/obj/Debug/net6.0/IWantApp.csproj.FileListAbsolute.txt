@@ -68,3 +68,4 @@ C:\Users\Legale\teste\IWantApp\src\bin\Debug\net6.0\Microsoft.AspNetCore.Identit
 C:\Users\Legale\teste\IWantApp\src\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Legale\teste\IWantApp\src\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Legale\teste\IWantApp\src\bin\Debug\net6.0\Dapper.dll
+C:\Users\Legale\teste\IWantApp\src\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

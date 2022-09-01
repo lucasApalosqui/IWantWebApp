@@ -25,7 +25,7 @@ public class TokenPost
             Results.BadRequest();
         }
 
-        var key = Encoding.ASCII.GetBytes("A@pohT56##resiP");
+        var key = Encoding.ASCII.GetBytes("A@fderwfQQSDXCCer34");
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new Claim[]
