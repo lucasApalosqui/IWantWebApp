@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "hsdyAnx43ssAbTst3zrfxOlj3gHii2BUgyHFSRETW9z26QgUv/+coFUoatrLwBjghaZhbZ4FWPQfeP3yLkSpBQ==",
+  "dgSpecHash": "phEGjX/KyY3RPr/SzMfcjAog1RdbQqziweyaNfxcJJeQmENv4qkDiJf0OipEIqxEwaiowK+kQvShi+HB7yCDPg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Legale\\teste\\IWantApp\\src\\IWantApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Legale\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\Legale\\.nuget\\packages\\flunt\\2.0.5\\flunt.2.0.5.nupkg.sha512",
     "C:\\Users\\Legale\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Legale\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.8\\microsoft.aspnetcore.cryptography.internal.6.0.8.nupkg.sha512",

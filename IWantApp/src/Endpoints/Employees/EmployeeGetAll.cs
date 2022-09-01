@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Dapper;
+using IWantApp.Infra.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using MySqlConnector;
 using System.Security.Claims;
 
 namespace IWantApp.Endpoints.Employees;
@@ -9,17 +14,27 @@ public class EmployeeGetAll
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
     public static Delegate Handle => Action;
 
-    public static IResult Action(int page, int rows, UserManager<IdentityUser> userManager)
+    public static IResult Action(int? page, int? rows, IConfiguration configuration)
     {
-        var users = userManager.Users.Skip((page -1) * rows).Take(rows).ToList();
-        var employees = new List<EmployeeResponse>();
-        foreach(var item in users)
+        if(page == null || rows == null)
         {
-            var claims = userManager.GetClaimsAsync(item).Result;
-            var claimName = claims.FirstOrDefault(c => c.Type == "Name");
-            var userName = claimName != null ? claimName.Value : String.Empty;
-            employees.Add(new EmployeeResponse(item.Email, userName));
+            return Results.BadRequest("Rows and Pages must be defined!!");
         }
+        if(rows > 10)
+        {
+            return Results.BadRequest("Rows doesnt be more than 10");
+        }
+        var acount = (page - 1) * rows;
+        using var db = new MySqlConnection(configuration.GetConnectionString("IWantDb"));
+        var query = @"Select Email, ClaimValue as Name
+            From aspnetusers u INNER JOIN aspnetuserclaims c
+            on u.id = c.UserId and ClaimType = 'Name'
+            order by Name
+            LIMIT @acount,@rows";
+        var employees = db.Query<EmployeeResponse>(
+            query,
+            new { acount, rows }
+            );
         return Results.Ok(employees);
     }
 }
