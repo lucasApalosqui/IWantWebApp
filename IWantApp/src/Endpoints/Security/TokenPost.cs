@@ -31,7 +31,7 @@ public class TokenPost
         var subject = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Email, loginRequest.email),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
+                new Claim(ClaimTypes.NameIdentifier, user.Email)
             });
         subject.AddClaims(claims);
 
@@ -43,7 +43,7 @@ public class TokenPost
                 new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             Audience = configuration["JwtBearerTokenSettings:Audience"],
             Issuer = configuration["JwtBearerTokenSettings:Issuer"],
-            Expires = DateTime.UtcNow.AddSeconds(30)
+            Expires = DateTime.UtcNow.AddSeconds(60)
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();
