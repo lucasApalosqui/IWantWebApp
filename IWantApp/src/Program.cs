@@ -3,6 +3,7 @@ using IWantApp.Endpoints.Employees;
 using IWantApp.Endpoints.Security;
 using IWantApp.Infra.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -20,6 +21,16 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => {
     options.Password.RequireLowercase = false;
     options.Password.RequiredLength = 3;
 }).AddEntityFrameworkStores<ApplicationDbContext>();
+
+/* Definir que todos os endpoints precisem ser autenticados 
+ options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+     .RequireAuthenticatedUser()
+     .Build();
+}
+*/
 
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(x =>
