@@ -33,6 +33,7 @@ public class TokenPost
             Subject = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Email, loginRequest.email),
+                new Claim("EmployeeCode", "1")
 
             }),
             SigningCredentials =

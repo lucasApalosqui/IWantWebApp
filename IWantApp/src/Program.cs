@@ -23,16 +23,18 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => {
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
 /* Definir que todos os endpoints precisem ser autenticados 
- options =>
+
+*/
+
+builder.Services.AddAuthorization(options =>
 {
     options.FallbackPolicy = new AuthorizationPolicyBuilder()
      .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
      .RequireAuthenticatedUser()
      .Build();
-}
-*/
-
-builder.Services.AddAuthorization();
+    options.AddPolicy("EmployeePolicy", p =>
+      p.RequireAuthenticatedUser().RequireClaim("EmployeeCode"));
+});
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
