@@ -27,15 +27,18 @@ public class TokenPost
             Results.BadRequest();
         }
 
+        var claims = userManager.GetClaimsAsync(user).Result;
+        var subject = new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.Email, loginRequest.email),
+                new Claim(ClaimTypes.NameIdentifier, user.Id)
+            });
+        subject.AddClaims(claims);
+
         var key = Encoding.ASCII.GetBytes(configuration["JwtBearerTokenSettings:SecretKey"]);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
-                new Claim(ClaimTypes.Email, loginRequest.email),
-                new Claim("EmployeeCode", "1")
-
-            }),
+            Subject = subject,
             SigningCredentials =
                 new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             Audience = configuration["JwtBearerTokenSettings:Audience"],
