@@ -11,7 +11,7 @@ public class CategoryPost
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => Action;
 
-    [Authorize]
+    [Authorize(Policy = "EmployeePolicy")]
     public static IResult Action(CategoryRequest categoryRequest,HttpContext http, ApplicationDbContext context)
     {
         var userId = http.User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
