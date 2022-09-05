@@ -25,9 +25,6 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => {
     options.Password.RequiredLength = 3;
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
-/* Definir que todos os endpoints precisem ser autenticados 
-
-*/
 
 builder.Services.AddAuthorization(options =>
 {
