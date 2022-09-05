@@ -13,7 +13,7 @@ public class QueryAllUsersWithClaimNames
 		this.configuration = configuration;
 	}
 
-	public IEnumerable<EmployeeResponse> Execute(int page, int rows)
+	public async Task<IEnumerable<EmployeeResponse>> Execute(int page, int rows)
 	{
         var acount = (page - 1) * rows;
         using var db = new MySqlConnection(configuration.GetConnectionString("IWantDb"));
@@ -22,7 +22,7 @@ public class QueryAllUsersWithClaimNames
             on u.id = c.UserId and ClaimType = 'Name'
             order by Name
             LIMIT @acount,@rows";
-            return db.Query<EmployeeResponse>(
+            return await db.QueryAsync<EmployeeResponse>(
             query,
             new { acount, rows }
             );
