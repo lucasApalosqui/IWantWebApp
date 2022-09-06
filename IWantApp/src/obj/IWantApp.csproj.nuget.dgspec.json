@@ -82,6 +82,14 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "serilog.aspnetcore": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "serilog.sinks.mysql": {
+              "target": "Package",
+              "version": "[4.6.0, )"
             }
           },
           "imports": [

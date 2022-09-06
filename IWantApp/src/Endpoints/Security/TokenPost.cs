@@ -18,8 +18,6 @@ public class TokenPost
     public static async Task<IResult> Action(LoginRequest loginRequest, IConfiguration configuration, UserManager<IdentityUser> userManager, ILogger<TokenPost> log)
     {
         log.LogInformation("Getting Token");
-        log.LogWarning("Warning");
-        log.LogError("Error");
 
         var user = await userManager.FindByEmailAsync(loginRequest.email);
         if(user == null)
