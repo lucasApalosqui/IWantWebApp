@@ -59,6 +59,7 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+builder.Services.AddScoped<QueryAllProducts>();
 builder.Services.AddScoped<QueryAllUsersWithClaimNames>();
 
 var app = builder.Build();

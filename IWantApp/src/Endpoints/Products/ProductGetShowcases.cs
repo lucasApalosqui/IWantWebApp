@@ -1,6 +1,8 @@
-﻿using IWantApp.Infra.Data;
+﻿using Google.Protobuf.WellKnownTypes;
+using IWantApp.Infra.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using MySqlX.XDevAPI.Relational;
 
 namespace IWantApp.Endpoints.Products;
 
@@ -11,13 +13,40 @@ public class ProductGetShowCases
     public static Delegate Handle => Action;
 
     [AllowAnonymous]
-    public static async Task<IResult> Action(ApplicationDbContext context)
+    public static async Task<IResult> Action(int? page, int? row, string? orderby ,QueryAllProducts query)
     {
-        var products = context.Products.Include(p => p.Category)
-            .Where(p => p.HasStock && p.Category.Active)
-            .OrderBy(p => p.Name)
-            .ToList();
-        var results = products.Select(p => new ProductResponse(p.Name, p.Category.Name, p.Description, p.HasStock, p.Active, p.Price));
-        return Results.Ok(results);
+        if (page == null)
+        {
+            page = 1;
+        }
+        if (row == null)
+        {
+            row = 1;
+        }
+
+        if (string.IsNullOrEmpty(orderby))
+        {
+            orderby = "name";
+        }
+
+        if(orderby != "name" && orderby != "price")
+        {
+            orderby = "name";
+        }
+
+
+        var queryFilter = await query.Execute(page.Value, row.Value);
+
+        if(orderby == "name")
+        {
+            queryFilter = queryFilter.OrderBy(p => p.Name);
+        }
+        else
+        {
+            queryFilter = queryFilter.OrderBy(p => p.price);
+        }
+
+        
+        return Results.Ok(queryFilter);
     }
 }
