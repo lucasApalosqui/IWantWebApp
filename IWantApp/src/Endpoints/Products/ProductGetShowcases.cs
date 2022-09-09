@@ -13,29 +13,20 @@ public class ProductGetShowCases
     public static Delegate Handle => Action;
 
     [AllowAnonymous]
-    public static async Task<IResult> Action(int? page, int? row, string? orderby ,QueryAllProducts query)
+    public static async Task<IResult> Action(QueryAllProducts query, int page = 1, int row = 10, string orderby = "name")
     {
-        if (page == null)
+        if(row > 50)
         {
-            page = 1;
-        }
-        if (row == null)
-        {
-            row = 1;
-        }
-
-        if (string.IsNullOrEmpty(orderby))
-        {
-            orderby = "name";
+            return Results.Problem(title:"No more 50 rows are permited", statusCode: 400);
         }
 
         if(orderby != "name" && orderby != "price")
         {
-            orderby = "name";
+            return Results.Problem(title: "Order by just only price or name", statusCode: 400);
         }
 
 
-        var queryFilter = await query.Execute(page.Value, row.Value);
+        var queryFilter = await query.Execute(page, row);
 
         if(orderby == "name")
         {
