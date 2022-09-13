@@ -1,4 +1,5 @@
 ﻿using Flunt.Notifications;
+using IWantApp.Domain.Orders;
 using IWantApp.Domain.Products;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -41,6 +42,15 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 
         builder.Entity<Category>()
             .Property(c => c.Name).IsRequired();
+
+        builder.Entity<Order>()
+          .Property(c => c.ClientId).IsRequired();
+        builder.Entity<Order>()
+          .Property(c => c.DeliveryAdress).IsRequired();
+        builder.Entity<Order>()
+          .HasMany(o => o.Products)
+          .WithMany(p => p.Orders)
+          .UsingEntity(x => x.ToTable("OrderProducts"));
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configuration)
