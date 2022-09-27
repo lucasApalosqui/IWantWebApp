@@ -5,7 +5,6 @@ using System.Security.Claims;
 
 namespace IWantApp.Endpoints.Clients;
 
-public record ClientRequest(string Email, string Password, string Name, string Cpf);
 
 public class ClientPost
 {
@@ -19,7 +18,8 @@ public class ClientPost
         var userClaims = new List<Claim>
         {
             new Claim("Cpf", clientRequest.Cpf),
-            new Claim("name", clientRequest.Name)
+            new Claim("Name", clientRequest.Name),
+            new Claim("Email", clientRequest.Email),
         };
 
         (IdentityResult identity, string userId) result = await userCreator.Create(clientRequest.Email, clientRequest.Password, userClaims );
