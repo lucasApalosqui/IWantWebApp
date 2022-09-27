@@ -37,7 +37,7 @@ public class TokenPost
         var subject = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Email, loginRequest.email),
-                new Claim(ClaimTypes.NameIdentifier, user.Email)
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
             });
         subject.AddClaims(claims);
 

@@ -16,7 +16,7 @@ public class ClientGet
         var user = http.User;
         var result = new
         {
-            Email = user.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value,
+            Id = user.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value,
             cpf = user.Claims.First(c => c.Type == "Cpf").Value,
 
         };
